@@ -396,7 +396,8 @@ cascading hierarchy, use the !important attribute.
 */
 
 /* Style PrimeFaces Command Button --> p:commandButton  */
-.commandButton, .ui-confirmdialog-yes, .ui-confirmdialog-no, .ui-fileupload-choose, .ui-fileupload-upload, .ui-fileupload-cancel {
+.commandButton, .ui-confirmdialog-yes, .ui-confirmdialog-no, 
+.ui-fileupload-choose, .ui-fileupload-upload, .ui-fileupload-cancel {
     border-radius: 2em !important;
     font-family: Arial, Helvetica, sans-serif !important;
     font-size: 10pt !important;
@@ -508,6 +509,12 @@ if content overflows an element's box.
 
 /* Leave 10px pading on top for the ui-button elements */
 .ui-button {
-    margin-top: 10px !important;
+    border-radius: 2em;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10pt;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+    color: black;
 }
 
