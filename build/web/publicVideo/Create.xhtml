@@ -8,27 +8,77 @@
 
     <ui:composition>
 
-        <p:dialog id="PublicVideoCreateDlg" widgetVar="PublicVideoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePublicVideoTitle}">
+        <p:dialog id="PublicVideoCreateDlg" widgetVar="PublicVideoCreateDialog" modal="true" 
+                  resizable="false" appendTo="@(body)" header="#{bundle.CreatePublicVideoTitle}"
+                  width="80%">
+            
             <h:form id="PublicVideoCreateForm">
+                
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{publicVideoController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreatePublicVideoLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{publicVideoController.selected.id}" title="#{bundle.CreatePublicVideoTitle_id}" required="true" requiredMessage="#{bundle.CreatePublicVideoRequiredMessage_id}"/>
+                    <p:panelGrid columns="2" columnClasses="videoColumn1, videoColumn2"
+                                 rendered="#{publicVideoController.selected != null}"
+                                 styleClass="createPublicVideo">
+                        <!-- Video Title -->
                         <p:outputLabel value="#{bundle.CreatePublicVideoLabel_title}" for="title" />
-                        <p:inputText id="title" value="#{publicVideoController.selected.title}" title="#{bundle.CreatePublicVideoTitle_title}" required="true" requiredMessage="#{bundle.CreatePublicVideoRequiredMessage_title}"/>
+                        <p:inputText id="title" value="#{publicVideoController.selected.title}" 
+                                     title="#{bundle.CreatePublicVideoTitle_title}" required="true" 
+                                     requiredMessage="#{bundle.CreatePublicVideoRequiredMessage_title}"
+                                     style="width: 98%"/>
+
+                        <!-- Video Description -->
                         <p:outputLabel value="#{bundle.CreatePublicVideoLabel_description}" for="description" />
-                        <p:inputText id="description" value="#{publicVideoController.selected.description}" title="#{bundle.CreatePublicVideoTitle_description}" required="true" requiredMessage="#{bundle.CreatePublicVideoRequiredMessage_description}"/>
+                        <p:inputText id="description" value="#{publicVideoController.selected.description}" 
+                                     title="#{bundle.CreatePublicVideoTitle_description}" required="true" style="width: 98%"
+                                     requiredMessage="#{bundle.CreatePublicVideoRequiredMessage_description}"/>
+
+                        <!-- Video YouTube ID -->
                         <p:outputLabel value="#{bundle.CreatePublicVideoLabel_youtubeVideoId}" for="youtubeVideoId" />
-                        <p:inputText id="youtubeVideoId" value="#{publicVideoController.selected.youtubeVideoId}" title="#{bundle.CreatePublicVideoTitle_youtubeVideoId}" required="true" requiredMessage="#{bundle.CreatePublicVideoRequiredMessage_youtubeVideoId}"/>
+                        <p:inputText id="youtubeVideoId" value="#{publicVideoController.selected.youtubeVideoId}" 
+                                     title="#{bundle.CreatePublicVideoTitle_youtubeVideoId}" required="true" 
+                                     requiredMessage="#{bundle.CreatePublicVideoRequiredMessage_youtubeVideoId}"/>
+
+                        <!-- Video Duration -->
                         <p:outputLabel value="#{bundle.CreatePublicVideoLabel_duration}" for="duration" />
-                        <p:inputText id="duration" value="#{publicVideoController.selected.duration}" title="#{bundle.CreatePublicVideoTitle_duration}" required="true" requiredMessage="#{bundle.CreatePublicVideoRequiredMessage_duration}"/>
+                        <p:inputText id="duration" value="#{publicVideoController.selected.duration}" 
+                                     title="#{bundle.CreatePublicVideoTitle_duration}" required="true" 
+                                     requiredMessage="#{bundle.CreatePublicVideoRequiredMessage_duration}"/>
+
+                        <!-- Video Date Published -->
                         <p:outputLabel value="#{bundle.CreatePublicVideoLabel_datePublished}" for="datePublished" />
-                        <p:calendar id="datePublished" pattern="MM/dd/yyyy" value="#{publicVideoController.selected.datePublished}" title="#{bundle.EditPublicVideoTitle_datePublished}" required="true" requiredMessage="#{bundle.EditPublicVideoRequiredMessage_datePublished}" showOn="button"/>
+                        <p:calendar id="datePublished" pattern="MM/dd/yyyy" value="#{publicVideoController.selected.datePublished}" 
+                                    title="#{bundle.EditPublicVideoTitle_datePublished}" required="true" 
+                                    requiredMessage="#{bundle.EditPublicVideoRequiredMessage_datePublished}" showOn="button"/>
+
+                        <!-- Video Category-->
                         <p:outputLabel value="#{bundle.CreatePublicVideoLabel_category}" for="category" />
-                        <p:inputText id="category" value="#{publicVideoController.selected.category}" title="#{bundle.CreatePublicVideoTitle_category}" required="true" requiredMessage="#{bundle.CreatePublicVideoRequiredMessage_category}"/>
+                        <p:selectOneMenu id="category" value="#{publicVideoController.selected.category}" 
+                                     title="#{bundle.CreatePublicVideoTitle_category}" required="true" 
+                                     requiredMessage="#{bundle.CreatePublicVideoRequiredMessage_category}">
+                            <f:selectItem itemLabel="Select Video Category" itemValue="" noSelectionOption="true"/>
+                            <f:selectItem itemLabel="How-to &amp; Style" itemValue="How-to &amp; Style"/>
+                            <f:selectItem itemLabel="Music" itemValue="Music"/>
+                            <f:selectItem itemLabel="News &amp; Politics" itemValue="News &amp; Politics"/>
+                            <f:selectItem itemLabel="Non-profits &amp; Activism" itemValue="Non-profits &amp; Activism"/>
+                            <f:selectItem itemLabel="People &amp; Blogs" itemValue="People &amp; Blogs"/>
+                            <f:selectItem itemLabel="Pets &amp; Animals" itemValue="Pets &amp; Animals"/>
+                            <f:selectItem itemLabel="Science &amp; Technology" itemValue="Science &amp; Technology"/>
+                            <f:selectItem itemLabel="Sports" itemValue="Sports"/>
+                            <f:selectItem itemLabel="Travel &amp; Events" itemValue="Travel &amp; Events"/>
+                        </p:selectOneMenu>
+                    
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{publicVideoController.create}" value="#{bundle.Save}" update="display,:PublicVideoListForm:datalist,:growl" oncomplete="handleSubmit(args,'PublicVideoCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="PublicVideoCreateDialog.hide()"/>
+                    <p:spacer height="10"/>
+                    <div align="center">
+                        <!-- CREATE button -->
+                        <p:commandButton actionListener="#{publicVideoController.create}" value="#{bundle.Save}"
+                                         styleClass="commandButton" icon="ui-icon-disk" ajax="false"
+                                         update="display,:PublicVideoListForm:datalist,:growl" 
+                                         oncomplete="handleSubmit(args,'PublicVideoCreateDialog');"/>
+                        &nbsp;
+                        <!-- CANCEL button -->
+                        <p:commandButton value="#{bundle.Cancel}" onclick="PF('PublicVideoCreateDialog').hide()"
+                                         styleClass="commandButton" icon="ui-icon-cancel"/>
+                    </div>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

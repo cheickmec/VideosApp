@@ -273,7 +273,25 @@ Other Style Definitions
     background-color: #FFEBCD;   /* Blanched Almond  */
     white-space: nowrap;  /* Disallow line break */
 }
-
+.videoColumn1 {
+    text-align: right;
+    background-color: #FFE4C4;   /* Bisque */
+    border:none !important;
+    white-space: nowrap;  /* Disallow line break */
+}
+.videoColumn2{
+    text-align: left;
+    background-color: #FFE4C4;   /* Bisque */
+    border: none !important;
+    white-space: nowrap;  /* Disallow line break */
+    width: 90%;
+}
+.createPublicVideo.ui-panelgrid>*>tr,
+.createPublicVideo.ui-panelgrid .ui-panelgrid-cell {
+    border: none;
+}
+.createPublicVideo {
+}
 /* Style error messages text */
 .errorMessages {
     font-family: Arial, Helvetica, sans-serif;
