@@ -12,29 +12,43 @@ Copyright © 2017 Cheick Berthe. All rights reserved.
 
     <ui:composition>
 
-        <p:dialog id="PublicVideoViewDlg" widgetVar="PublicVideoViewDialog" 
+        <p:dialog id="PublicVideoViewDlg" widgetVar="PublicVideoViewDialog" width="80%"
                   modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPublicVideoTitle}">
             <h:form id="PublicVideoViewForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{publicVideoController.selected != null}">
-                        <h:outputText value="#{bundle.ViewPublicVideoLabel_id}"/>
-                        <h:outputText value="#{publicVideoController.selected.id}" title="#{bundle.ViewPublicVideoTitle_id}"/>
+                    <p:panelGrid columns="2" rendered="#{publicVideoController.selected != null}" 
+                                 styleClass="viewPublicVideo" columnClasses="videoColumn1, videoColumn2">
+                        <!-- Title -->
                         <h:outputText value="#{bundle.ViewPublicVideoLabel_title}"/>
                         <h:outputText value="#{publicVideoController.selected.title}" title="#{bundle.ViewPublicVideoTitle_title}"/>
+
+                        <!-- Description -->
                         <h:outputText value="#{bundle.ViewPublicVideoLabel_description}"/>
                         <h:outputText value="#{publicVideoController.selected.description}" title="#{bundle.ViewPublicVideoTitle_description}"/>
+
+                        <!-- Video ID -->
                         <h:outputText value="#{bundle.ViewPublicVideoLabel_youtubeVideoId}"/>
                         <h:outputText value="#{publicVideoController.selected.youtubeVideoId}" title="#{bundle.ViewPublicVideoTitle_youtubeVideoId}"/>
+
+                        <!-- Duration -->
                         <h:outputText value="#{bundle.ViewPublicVideoLabel_duration}"/>
                         <h:outputText value="#{publicVideoController.selected.duration}" title="#{bundle.ViewPublicVideoTitle_duration}"/>
+
+                        <!-- Date Published -->
                         <h:outputText value="#{bundle.ViewPublicVideoLabel_datePublished}"/>
                         <h:outputText value="#{publicVideoController.selected.datePublished}" title="#{bundle.ViewPublicVideoTitle_datePublished}">
                             <f:convertDateTime pattern="MM/dd/yyyy" />
                         </h:outputText>
+
+                        <!-- Category-->
                         <h:outputText value="#{bundle.ViewPublicVideoLabel_category}"/>
                         <h:outputText value="#{publicVideoController.selected.category}" title="#{bundle.ViewPublicVideoTitle_category}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="PublicVideoViewDialog.hide()"/>
+                    <p:spacer height="10"/>
+                    <div align="center">
+                        <p:commandButton value="#{bundle.Close}" onclick="PF('PublicVideoViewDialog').hide()" styleClass="commandButton" icon="ui-icon-close"/>
+                    </div>
+                    <p:spacer height="10"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

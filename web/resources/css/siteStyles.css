@@ -290,7 +290,9 @@ Other Style Definitions
 .createPublicVideo.ui-panelgrid .ui-panelgrid-cell {
     border: none;
 }
-.createPublicVideo {
+.viewPublicVideo.ui-panelgrid>*>tr,
+.viewPublicVideo.ui-panelgrid .ui-panelgrid-cell {
+    border: none;
 }
 /* Style error messages text */
 .errorMessages {
