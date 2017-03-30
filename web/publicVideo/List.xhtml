@@ -92,23 +92,30 @@
                                 <h:outputText value="#{item.category}"/>
                             </p:column>
                             <f:facet name="footer">
+                                <!-- Create Button -->
                                 <p:commandButton id="createButton" icon="ui-icon-plus"   
                                                  value="#{bundle.Create}" actionListener="#{publicVideoController.prepareCreate}" 
                                                  update=":PublicVideoCreateForm" oncomplete="PF('PublicVideoCreateDialog').show()"/>
+
+                                <!-- View Button -->
                                 <p:commandButton id="viewButton"   icon="ui-icon-search" 
                                                  value="#{bundle.View}" update=":PublicVideoViewForm" 
                                                  oncomplete="PF('PublicVideoViewDialog').show()" 
                                                  disabled="#{empty publicVideoController.selected}"/>
+
+                                <!-- Edit Button -->
                                 <p:commandButton id="editButton"   icon="ui-icon-pencil" 
                                                  value="#{bundle.Edit}" update=":PublicVideoEditForm" 
                                                  oncomplete="PF('PublicVideoEditDialog').show()" 
                                                  disabled="#{empty publicVideoController.selected}"/>
+
+                                <!-- Delete Button -->
                                 <p:commandButton id="deleteButton" icon="ui-icon-trash"  
                                                  value="#{bundle.Delete}" actionListener="#{publicVideoController.destroy}" 
                                                  update=":growl,datalist" disabled="#{empty publicVideoController.selected}">
-                                    <p:confirm header="Delete Confirmation"
-                                               message="Are you sure you want to permanently delete the selected video from the database?"
-                                               icon="ui-icon-alert" />
+                                    <p:confirm header="#{bundle.PublicVideoDeleteConfirmationHeader}"
+                                               message="#{bundle.PublicVideoDeleteConfirmationMessage}"
+                                               icon="ui-icon-alert" />                                
                                 </p:commandButton>
                                 <p:confirmDialog id="confirmDialogBox" global="true" showEffect="fade" hideEffect="fade">
                                     <div align="center">
@@ -120,10 +127,21 @@
                                                          styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
                                     </div>
                                 </p:confirmDialog>
+
+                                <!-- Play Button -->                                
                                 <p:commandButton id="playButton" icon="ui-icon-play"
                                                  value="#{bundle.Play}" update=":PublicVideoPlayForm"
                                                  oncomplete="PF('PublicVideoPlayDialog').show()"
                                                  disabled="#{empty publicVideoController.selected}"/>
+
+                                <!-- Share Button -->
+                                <p:commandButton id="shareButton" icon="ui-icon-circle-plus"
+                                                 value="#{bundle.Share}" disabled="#{empty publicVideoController.selected}">
+                                    <p:confirm header="#{publicVideoShareConfirmationHeader}"
+                                               message="#{bundle.PublicVideoShareConfirmationMessage}"
+                                               icon="ui-icon-alert" /> 
+                                </p:commandButton>
+                                
                             </f:facet>
                         </p:dataTable>
                     </p:panel>
