@@ -142,6 +142,10 @@
                                                icon="ui-icon-alert" /> 
                                 </p:commandButton>
                                 
+                                <!-- Search Button -->
+                                <p:commandButton id="searchButton" icon="ui-icon-search"
+                                                 value="#{bundle.Search}" update=":PublicVideoSearchForm"
+                                                 oncomplete="PF('PublicVideoSearchDialog').show()"/>
                             </f:facet>
                         </p:dataTable>
                     </p:panel>
@@ -151,6 +155,7 @@
             <ui:include src="Edit.xhtml"/>
             <ui:include src="View.xhtml"/>
             <ui:include src="Play.xhtml"/>
+            <ui:include src="Search.xhtml"/>
         </ui:define>
     </ui:composition>
 
