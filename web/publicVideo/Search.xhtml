@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created by Cheick Berthe on 2017.03.30 
+Copyright © 2017 Cheick Berthe. All rights reserved.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition>
+        <p:dialog id="PublicVideoSearchDlg" widgetVar="PublicVideoSearchDialog" 
+                  width="auto" modal="true" resizable="false" appendTo="@(body)"
+                  header="#{bundle.SearchPublicVideoTitle}">
+            <h:form id="PublicVideoSearchForm">
+
+                <p:panel>
+                    <table border="0" align="center" width="100%" cellpadding="0">
+                        <tr>
+                            
+                            <td align="right">
+                                <p:outputLabel value="#{bundle.SearchPublicVideoLabel_title}:" for="keyword" />
+                            </td>
+                            
+                            <td width="40%" align="center">
+                                <p:inputText id="keyword" value="#{searchedVideoController.searchKeyword}" required="true"
+                                             requiredMessage="#{bundle.SearchPublicVideoRequiredMessage_title}">
+                                    <f:validateLength minimum="2"/>
+                                </p:inputText>
+                                <p:watermark for="keyword" value="#{bundle.SearchPublicVideoWatermark}" />
+                            </td>
+                            
+                            <td width="40%" align="center">
+                                <p:selectOneMenu id="searchCategoryField" required="true" 
+                                                 requiredMessage="#{bundle.SearchPublicVideoRequireMessage_category}"
+                                                 value="#{searchedVideoController.searchCategory}">
+                                    <f:selectItem itemLabel="Select Category" itemValue="" noSelectionOption="true" />
+                                    <f:selectItem itemLabel="All" itemValue="all"/>
+                                    <f:selectItem itemLabel="Video Title" itemValue="title"/>
+                                    <f:selectItem itemLabel="Video Description" itemValue="description"/>
+                                    <f:selectItem itemLabel="Video Category" itemValue="category"/>
+                                </p:selectOneMenu>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <h:panelGroup>
+                        <p:spacer height="20"/>
+                        <div align="center">
+                            <!-- SUBMIT-->
+                            <p:commandButton value="Search" ajax="false" icon="ui-icon-search"
+                                             styleClass="commandButton"
+                                             actionListener="#{searchedVideoController.search()}"/>
+                            &nbsp;&nbsp;
+                            <p:commandButton value="#{bundle.Cancel}" onclick="PF('PublicVideoSearchDialog').hide()"
+                                             styleClass="commandButton" icon="ui-icon-cancel">
+                                <f:ajax render=":PublicVideoSearchForm" />
+                            </p:commandButton>
+                        </div>
+                    </h:panelGroup>
+                </p:panel>
+            </h:form>
+        </p:dialog>
+    </ui:composition>
+</html>
