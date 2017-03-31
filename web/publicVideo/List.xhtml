@@ -30,8 +30,10 @@
                                      paginator="true" rowKey="#{item.id}" rows="5"
                                      rowsPerPageTemplate="5 10,20,30,40,50">
 
-                            <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton playButton"/>
-                            <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton playButton"/>
+                            <p:ajax event="rowSelect"   update="createButton viewButton editButton 
+                                    deleteButton playButton shareButton searchButton"/>
+                            <p:ajax event="rowUnselect" update="createButton viewButton editButton 
+                                    deleteButton playButton shareButton searchButton"/>
 
                             <!-- Video ID-->
                             <p:column style="width: 20px;text-align: center">

@@ -17,13 +17,13 @@ Copyright © 2017 Cheick Berthe. All rights reserved.
                   style="height: 80%">
             <h:form id="PublicVideoPlayForm">
                 <div align="center" style="width: auto">
-                    <p:panel style="text-align: center;border: none"> 
+                    <p:panel style="text-align: center;border: none">
                         <iframe width="auto" height="auto"
                                 src="https://www.youtube.com/embed/#{publicVideoController.selected.youtubeVideoId}" allowfullscreen="true">
                         </iframe>
                         <br /><br/>
                         <!-- CLOSE Button -->
-                        <p:commandButton value="#{bundle.Close}" onclick="PublicVideoPlayDialog.hide()"
+                        <p:commandButton value="#{bundle.Close}" onclick="PF('PublicVideoPlayDialog').hide()"
                                          styleClass="commandButton" icon="ui-icon-close"/>
                     </p:panel>
                 </div>
