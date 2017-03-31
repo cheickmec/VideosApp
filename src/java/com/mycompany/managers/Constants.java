@@ -8,7 +8,7 @@ package com.mycompany.managers;
  *
  * @author berth
  */
-final class Constants {
+public final class Constants {
 
     /* =========== Design Decision ===========
         We will be using directories external to our application 

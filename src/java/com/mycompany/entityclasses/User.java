@@ -265,9 +265,14 @@ public class User implements Serializable {
         return true;
     }
 
+    /**
+     * @return the String representation of a User id
+     */
     @Override
     public String toString() {
-        return "com.mycompany.entityclasses.User[ id=" + id + " ]";
+
+        // Returned String is the one shown in the p:dataTable under the User Id column in UserFiles.xhtml.
+        return id.toString();
     }
-    
+
 }
