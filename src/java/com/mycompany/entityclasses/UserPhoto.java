@@ -14,6 +14,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -30,27 +32,43 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     /* The following query is added. The others are auto generated */
-    @NamedQuery(name = "UserPhoto.findPhotosByUserID", query = "SELECT p FROM UserPhoto p WHERE p.userId = :userId")
+    @NamedQuery(name = "UserPhoto.findPhotosByUserID", query = "SELECT p FROM UserPhoto p WHERE p.userId.id = :userId")
     , @NamedQuery(name = "UserPhoto.findAll", query = "SELECT u FROM UserPhoto u")
     , @NamedQuery(name = "UserPhoto.findById", query = "SELECT u FROM UserPhoto u WHERE u.id = :id")
     , @NamedQuery(name = "UserPhoto.findByExtension", query = "SELECT u FROM UserPhoto u WHERE u.extension = :extension")
 })
 public class UserPhoto implements Serializable {
 
+    /*
+    ========================================================
+    Instance variables representing the attributes (columns)
+    of the UserPhoto table in the CloudDriveDB database.
+    ========================================================
+     */
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 5)
     @Column(name = "extension")
     private String extension;
-    @Column(name = "user_id")
-    private Integer userId;
 
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @ManyToOne
+    private User userId;
+
+
+    /*
+    ====================================================================
+    Class constructors for instantiating a UserPhoto entity object to
+    represent a row in the UserPhoto table in the CloudDriveDB database.
+    ====================================================================
+     */
     public UserPhoto() {
     }
 
@@ -63,6 +81,18 @@ public class UserPhoto implements Serializable {
         this.extension = extension;
     }
 
+    // This method is added to the generated code
+    public UserPhoto(String fileExtension, User id) {
+        this.extension = fileExtension;
+        userId = id;
+    }
+
+    /*
+    ======================================================
+    Getter and Setter methods for the attributes (columns)
+    of the UserPhoto table in the CloudDriveDB database.
+    ======================================================
+     */
     public Integer getId() {
         return id;
     }
@@ -79,11 +109,11 @@ public class UserPhoto implements Serializable {
         this.extension = extension;
     }
 
-    public Integer getUserId() {
+    public User getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(User userId) {
         this.userId = userId;
     }
 
@@ -148,6 +178,10 @@ public class UserPhoto implements Serializable {
 
     public String getThumbnailFilePath() {
         return Constants.PHOTOS_ABSOLUTE_PATH + getThumbnailFileName();
+    }
+
+    public String getTemporaryFilePath() {
+        return Constants.PHOTOS_ABSOLUTE_PATH + "tmp_file";
     }
 
 }
