@@ -14,6 +14,6 @@
     <!-- On Linux
       <property name="alternatedocroot_1" value="from=/CloudStorage/* dir=/home/cloudsd/Berthe" />
     -->
-    <property name="alternatedocroot_1" value="from=/CloudStorage/* dir=C:\\Users\\berth" />
+    <property description="Upload Images" name="alternatedocroot_1" value="from=/CloudStorage/* dir=C:\Users\berth\Documents\" />
 
 </glassfish-web-app>
