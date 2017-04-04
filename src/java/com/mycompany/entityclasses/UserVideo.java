@@ -46,33 +46,40 @@ public class UserVideo implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
+
     @Column(name = "user_id")
     private Integer userId;
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 256)
     @Column(name = "title")
     private String title;
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 512)
     @Column(name = "description")
     private String description;
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 32)
     @Column(name = "youtube_video_id")
     private String youtubeVideoId;
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 8)
     @Column(name = "duration")
     private String duration;
+
     @Basic(optional = false)
     @NotNull
     @Column(name = "date_published")
     @Temporal(TemporalType.DATE)
     private Date datePublished;
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 32)

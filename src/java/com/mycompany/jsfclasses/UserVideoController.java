@@ -90,9 +90,14 @@ public class UserVideoController implements Serializable {
 
         Integer userId = (Integer) FacesContext.getCurrentInstance().
                 getExternalContext().getSessionMap().get("user_id");
-        items = getFacade().findVideosByUserID(userId);
-
+        if (items == null) {
+            items = getFacade().findVideosByUserID(userId);
+        }
         return items;
+    }
+
+    public void reset() {
+        items = null;
     }
 
     private void persist(PersistAction persistAction, String successMessage) {

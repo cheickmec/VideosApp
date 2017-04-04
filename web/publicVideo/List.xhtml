@@ -139,7 +139,7 @@
                                 <!-- Share Button -->
                                 <p:commandButton id="shareButton" icon="ui-icon-circle-plus" actionListener="#{publicVideoController.share}"
                                                  value="#{bundle.Share}" disabled="#{empty publicVideoController.selected}"
-                                                 update=":growl">
+                                                 update=":growl" oncomplete="#{userVideoController.reset()}">
                                     <p:confirm header="#{bundle.PublicVideoShareConfirmationHeader}"
                                                message="#{bundle.PublicVideoShareConfirmationMessage}" 
                                                icon="ui-icon-alert" /> 

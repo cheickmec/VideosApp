@@ -22,7 +22,13 @@ public final class Constants {
         Therefore, we use the following two external directories 
         for the storage and retrieval of user's files.
      */
-    //public static final String PHOTOS_ABSOLUTE_PATH = "/home/cloudsd/Berthe/CloudStorage/PhotoStorage/";
+    /**
+     * For Linux/Mac
+     */
+    //public static final String PHOTOS_ABSOLUTE_PATH = "/home/cloudsd/Berthe/UserPhotoStorage/";
+    /**
+     * For Windows
+     */
     public static final String PHOTOS_ABSOLUTE_PATH = "C:\\Users\\berth\\Documents\\CloudStorage\\UserPhotoStorage\\";
 
     /*
@@ -33,11 +39,14 @@ public final class Constants {
     
     Relative path is defined with respect to the Alternate Document Root starting with 'CloudStorage'.
      */
-    //public static final String PHOTOS_RELATIVE_PATH = "CloudStorage/PhotoStorage/";
+    /**
+     * For Linux/Mac
+     */
+    //public static final String PHOTOS_RELATIVE_PATH = "UserPhotoStorage/";
+    /**
+     * For Windows
+     */
     public static final String PHOTOS_RELATIVE_PATH = "CloudStorage\\UserPhotoStorage\\";
-
-    //public static final String DEFAULT_PHOTO_RELATIVE_PATH = "CloudStorage/PhotoStorage/defaultUserPhoto.png";
-    //public static final String DEFAULT_PHOTO_RELATIVE_PATH = "C:\\Users\\berth\\Documents\\CloudStorage\\UserPhotoStorage\\defaultUserPhoto.png";
 
     /* Temporary filename */
     public static final String TEMP_FILE = "tmp_file";
@@ -46,10 +55,14 @@ public final class Constants {
     /**
      * United States postal state abbreviations
      */
-    public static final String[] STATES = {"AK", "AL", "AR", "AZ", "CA", "CO", "CT",
-        "DC", "DE", "FL", "GA", "GU", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA",
-        "MD", "ME", "MH", "MI", "MN", "MO", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM",
-        "NV", "NY", "OH", "OK", "OR", "PA", "PR", "PW", "RI", "SC", "SD", "TN", "TX", "UT",
+    public static final String[] STATES = {
+        "AK", "AL", "AR", "AZ", "CA", "CO", "CT",
+        "DC", "DE", "FL", "GA", "GU", "HI", "IA",
+        "ID", "IL", "IN", "KS", "KY", "LA", "MA",
+        "MD", "ME", "MH", "MI", "MN", "MO", "MS",
+        "MT", "NC", "ND", "NE", "NH", "NJ", "NM",
+        "NV", "NY", "OH", "OK", "OR", "PA", "PR",
+        "PW", "RI", "SC", "SD", "TN", "TX", "UT",
         "VA", "VI", "VT", "WA", "WI", "WV", "WY"};
 
     /**

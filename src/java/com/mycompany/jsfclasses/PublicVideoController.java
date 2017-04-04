@@ -96,8 +96,14 @@ public class PublicVideoController implements Serializable {
     }
 
     public List<PublicVideo> getItems() {
-        items = getFacade().findAll();
+        if (items == null) {
+            items = getFacade().findAll();
+        }
         return items;
+    }
+
+    public void reset() {
+        items = null;
     }
 
     private void persist(PersistAction persistAction, String successMessage) {
