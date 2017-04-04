@@ -76,7 +76,6 @@ public class AccountManager implements Serializable {
     @EJB
     private UserFacade userFacade;
 
- 
     /*
     The instance variable 'userPhotoFacade' is annotated with the @EJB annotation.
     The @EJB annotation directs the EJB Container (of the GlassFish AS) to inject (store) the object reference 
@@ -214,7 +213,6 @@ public class AccountManager implements Serializable {
         return userFacade;
     }
 
-
     public UserPhotoFacade getUserPhotoFacade() {
         return userPhotoFacade;
     }
@@ -295,9 +293,8 @@ public class AccountManager implements Serializable {
     upon successful account creation, redirect to show the SignIn page.
      */
     public String createAccount() {
-        
-        // First, check if the entered username is already being used
 
+        // First, check if the entered username is already being used
         // Obtain the object reference of a User object with username
         User aUser = getUserFacade().findByUsername(username);
 
@@ -307,9 +304,8 @@ public class AccountManager implements Serializable {
             statusMessage = "Username already exists! Please select a different one!";
             return "";
         }
-        
-        // The entered username is available
 
+        // The entered username is available
         if (statusMessage == null || statusMessage.isEmpty()) {
             try {
                 // Instantiate a new User object
@@ -318,7 +314,7 @@ public class AccountManager implements Serializable {
                 /*
                 Set the properties of the newly created newUser object with the values
                 entered by the user in the AccountCreationForm in CreateAccount.xhtml
-                */
+                 */
                 newUser.setFirstName(firstName);
                 newUser.setMiddleName(middleName);
                 newUser.setLastName(lastName);
@@ -332,7 +328,7 @@ public class AccountManager implements Serializable {
                 newUser.setEmail(email);
                 newUser.setUsername(username);
                 newUser.setPassword(password);
-                
+
                 getUserFacade().create(newUser);
 
             } catch (EJBException e) {
@@ -371,7 +367,7 @@ public class AccountManager implements Serializable {
                 /*
                 Set the signed-in user's properties to the values entered by
                 the user in the EditAccountProfileForm in EditAccount.xhtml.
-                */
+                 */
                 editUser.setFirstName(this.selected.getFirstName());
                 editUser.setMiddleName(this.selected.getMiddleName());
                 editUser.setLastName(this.selected.getLastName());
@@ -423,7 +419,6 @@ public class AccountManager implements Serializable {
                 // Delete all of the photo files associated with the signed-in user whose primary key is user_id
                 deleteAllUserPhotos(user_id);
 
-                
                 // Delete the User entity, whose primary key is user_id, from the CloudDriveDB database
                 getUserFacade().deleteUser(user_id);
 
@@ -687,20 +682,14 @@ public class AccountManager implements Serializable {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 
         // Redirect to show the index (Home) page
-        return "index.xhtml?faces-redirect=true";
+        return "/index.xhtml?faces-redirect=true";
     }
 
     public String userPhoto() {
 
-        // Obtain the signed-in user's username
-        String usernameOfSignedInUser = (String) FacesContext.getCurrentInstance()
-                .getExternalContext().getSessionMap().get("username");
-
-        // Obtain the object reference of the signed-in user
-        User signedInUser = getUserFacade().findByUsername(usernameOfSignedInUser);
-
         // Obtain the id (primary key in the database) of the signedInUser object
-        Integer userId = signedInUser.getId();
+        Integer userId = (Integer) FacesContext.getCurrentInstance()
+                .getExternalContext().getSessionMap().get("user_id");
 
         List<UserPhoto> photoList = getUserPhotoFacade().findPhotosByUserID(userId);
 
@@ -708,8 +697,8 @@ public class AccountManager implements Serializable {
             /*
             No user photo exists. Return defaultUserPhoto.png 
             in CloudStorage/PhotoStorage.
-            */
-            return Constants.DEFAULT_PHOTO_RELATIVE_PATH;
+             */
+            return Constants.PHOTOS_RELATIVE_PATH + "defaultUserPhoto.png";
         }
 
         /*
@@ -730,10 +719,9 @@ public class AccountManager implements Serializable {
         public static final String PHOTOS_RELATIVE_PATH = "CloudStorage/PhotoStorage/";
         
         Thus, JSF knows that 'CloudStorage/' is the document root directory.
-        */
-        
+         */
         String relativePhotoFilePath = Constants.PHOTOS_RELATIVE_PATH + thumbnailFileName;
-        
+
         return relativePhotoFilePath;
     }
 

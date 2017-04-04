@@ -20,7 +20,6 @@ import javax.faces.context.FacesContext;
  *
  * @author Berthe
  */
-
 @Named(value = "searchedVideoController")
 @SessionScoped
 public class searchedVideoController implements Serializable {
@@ -47,7 +46,6 @@ public class searchedVideoController implements Serializable {
     Getter and Setter Methods
     =========================
      */
-
     public PublicVideoFacade getPublicVideoFacade() {
         return publicVideoFacade;
     }
@@ -71,11 +69,12 @@ public class searchedVideoController implements Serializable {
     public void setSearchCategory(String searchCategory) {
         this.searchCategory = searchCategory;
     }
- 
 
     /**
-     * Return the list of object references of all those companies where 
-     * the search string 'searchString' entered by the user is contained in the searchField.
+     * Return the list of object references of all those companies where the
+     * search string 'searchString' entered by the user is contained in the
+     * searchField.
+     *
      * @return result of search
      */
     public List<PublicVideo> getSearchItems() {
@@ -96,7 +95,6 @@ public class searchedVideoController implements Serializable {
     Instance Methods
     =========================
      */
-
     /**
      * @SessionScoped enables to preserve the values of the instance variables
      * for the SearchResults.xhtml page to access.

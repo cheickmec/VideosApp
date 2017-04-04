@@ -8,29 +8,80 @@
 
     <ui:composition>
 
-        <p:dialog id="UserVideoEditDlg" widgetVar="UserVideoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditUserVideoTitle}">
+        <p:dialog id="UserVideoEditDlg" widgetVar="UserVideoEditDialog" modal="true" width="80%"
+                  resizable="false" appendTo="@(body)" header="#{bundle.EditUserVideoTitle}">
             <h:form id="UserVideoEditForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{userVideoController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditUserVideoLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{userVideoController.selected.id}" title="#{bundle.EditUserVideoTitle_id}" required="true" requiredMessage="#{bundle.EditUserVideoRequiredMessage_id}"/>
-                        <p:outputLabel value="#{bundle.EditUserVideoLabel_userId}" for="userId" />
-                        <p:inputText id="userId" value="#{userVideoController.selected.userId}" title="#{bundle.EditUserVideoTitle_userId}" />
+                    <p:panelGrid columns="2" rendered="#{userVideoController.selected != null}"
+                                 styleClass="createPublicVideo" columnClasses="videoColumn1, videoColumn2">
+                        <!-- TITLE -->
                         <p:outputLabel value="#{bundle.EditUserVideoLabel_title}" for="title" />
-                        <p:inputText id="title" value="#{userVideoController.selected.title}" title="#{bundle.EditUserVideoTitle_title}" required="true" requiredMessage="#{bundle.EditUserVideoRequiredMessage_title}"/>
+                        <p:inputText id="title" value="#{userVideoController.selected.title}" 
+                                     title="#{bundle.EditUserVideoTitle_title}" required="true" 
+                                     requiredMessage="#{bundle.EditUserVideoRequiredMessage_title}"
+                                     style="width: 98%"/>
+
+                        <!-- DESCRIPTION -->
                         <p:outputLabel value="#{bundle.EditUserVideoLabel_description}" for="description" />
-                        <p:inputText id="description" value="#{userVideoController.selected.description}" title="#{bundle.EditUserVideoTitle_description}" required="true" requiredMessage="#{bundle.EditUserVideoRequiredMessage_description}"/>
+                        <p:inputText id="description" value="#{userVideoController.selected.description}" 
+                                     title="#{bundle.EditUserVideoTitle_description}" required="true" 
+                                     requiredMessage="#{bundle.EditUserVideoRequiredMessage_description}"
+                                     style="width: 98%"/>
+
+                        <!-- YOUTUBE VIDEO ID -->
                         <p:outputLabel value="#{bundle.EditUserVideoLabel_youtubeVideoId}" for="youtubeVideoId" />
-                        <p:inputText id="youtubeVideoId" value="#{userVideoController.selected.youtubeVideoId}" title="#{bundle.EditUserVideoTitle_youtubeVideoId}" required="true" requiredMessage="#{bundle.EditUserVideoRequiredMessage_youtubeVideoId}"/>
+                        <p:inputText id="youtubeVideoId" value="#{userVideoController.selected.youtubeVideoId}" 
+                                     title="#{bundle.EditUserVideoTitle_youtubeVideoId}" required="true" 
+                                     requiredMessage="#{bundle.EditUserVideoRequiredMessage_youtubeVideoId}"/>
+
+                        <!-- DURATION -->
                         <p:outputLabel value="#{bundle.EditUserVideoLabel_duration}" for="duration" />
-                        <p:inputText id="duration" value="#{userVideoController.selected.duration}" title="#{bundle.EditUserVideoTitle_duration}" required="true" requiredMessage="#{bundle.EditUserVideoRequiredMessage_duration}"/>
+                        <p:inputText id="duration" value="#{userVideoController.selected.duration}" 
+                                     title="#{bundle.EditUserVideoTitle_duration}" required="true" 
+                                     requiredMessage="#{bundle.EditUserVideoRequiredMessage_duration}"/>
+
+                        <!--DATE PUBLISHED-->
                         <p:outputLabel value="#{bundle.EditUserVideoLabel_datePublished}" for="datePublished" />
-                        <p:calendar id="datePublished" pattern="MM/dd/yyyy" value="#{userVideoController.selected.datePublished}" title="#{bundle.EditUserVideoTitle_datePublished}" required="true" requiredMessage="#{bundle.EditUserVideoRequiredMessage_datePublished}" showOn="button"/>
+                        <p:calendar id="datePublished" pattern="MM/dd/yyyy" value="#{userVideoController.selected.datePublished}"
+                                    title="#{bundle.EditUserVideoTitle_datePublished}" 
+                                    required="true" requiredMessage="#{bundle.EditUserVideoRequiredMessage_datePublished}" 
+                                    showOn="button"/>
+
+                        <!--CATEGORY-->
                         <p:outputLabel value="#{bundle.EditUserVideoLabel_category}" for="category" />
-                        <p:inputText id="category" value="#{userVideoController.selected.category}" title="#{bundle.EditUserVideoTitle_category}" required="true" requiredMessage="#{bundle.EditUserVideoRequiredMessage_category}"/>
+                        <p:selectOneMenu id="category" value="#{userVideoController.selected.category}" 
+                                         title="#{bundle.EditUserVideoTitle_category}" required="true" 
+                                         requiredMessage="#{bundle.EditUserVideoRequiredMessage_category}">
+
+                            <f:selectItem itemLabel="Select Video Category" itemValue="" noSelectionOption="true"/>
+                            <f:selectItem itemLabel="Cars &amp; Vehicles" itemValue="Cars &amp; Vehicles"/>
+                            <f:selectItem itemLabel="Comedy" itemValue="Comedy"/>
+                            <f:selectItem itemLabel="Education" itemValue="Education"/>
+                            <f:selectItem itemLabel="Entertainment" itemValue="Entertainment"/>
+                            <f:selectItem itemLabel="Film &amp; Action" itemValue="Film &amp; Action"/>
+                            <f:selectItem itemLabel="Gaming" itemValue="Gaming"/>
+                            <f:selectItem itemLabel="How-to &amp; Style" itemValue="How-to &amp; Style"/>
+                            <f:selectItem itemLabel="Music" itemValue="Music"/>
+                            <f:selectItem itemLabel="News &amp; Politics" itemValue="News &amp; Politics"/>
+                            <f:selectItem itemLabel="Non-profits &amp; Activism" itemValue="Non-profits &amp; Activism"/>
+                            <f:selectItem itemLabel="People &amp; Blogs" itemValue="People &amp; Blogs"/>
+                            <f:selectItem itemLabel="Pets &amp; Animals" itemValue="Pets &amp; Animals"/>
+                            <f:selectItem itemLabel="Science &amp; Technology" itemValue="Science &amp; Technology"/>
+                            <f:selectItem itemLabel="Sports" itemValue="Sports"/>
+                            <f:selectItem itemLabel="Travel &amp; Events" itemValue="Travel &amp; Events"/>
+                        </p:selectOneMenu>
+
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{userVideoController.update}" value="#{bundle.Save}" update="display,:UserVideoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'UserVideoEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="UserVideoEditDialog.hide()"/>
+                    <p:spacer height="10"/>
+                    <div align="center">
+                        <!-- SAVE button -->
+                        <p:commandButton actionListener="#{userVideoController.update}" styleClass="commandButton"
+                                         value="#{bundle.Save}" update="display,:UserVideoListForm:datalist,:growl" 
+                                         oncomplete="handleSubmit(args, 'UserVideoEditDialog');" icon="ui-icon-disk"/>
+                        <!--CANCEL button-->
+                        <p:commandButton value="#{bundle.Cancel}" onclick="PF('UserVideoEditDialog').hide()"
+                                         styleClass="commandButton" icon="ui-icon-cancel"/>
+                    </div>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

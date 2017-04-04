@@ -32,7 +32,7 @@ Copyright © 2017 Cheick Berthe. All rights reserved.
                 <h:form id="EditAccountProfileForm">
 
                     <h2>Edit Account Profile</h2>
-                    
+
                     <f:event listener="#{accountManager.validatePasswordChange}" type="postValidate"/>
 
                     <p:panelGrid columns="2" columnClasses="accountColumn1, accountColumn2">
@@ -90,7 +90,7 @@ Copyright © 2017 Cheick Berthe. All rights reserved.
                             <f:validateLength minimum="5" />
                             <f:validator validatorId="zipCodeValidator"/> 
                         </p:inputText>
-                        
+
                         <!-- EMAIL ADDRESS -->
                         <p:outputLabel value="#{bundle.EditUserLabel_email}" for="email" />
                         <p:inputText id="email" value="#{accountManager.selected.email}" required="true" styleClass="accountInputTextField"
@@ -107,31 +107,31 @@ Copyright © 2017 Cheick Berthe. All rights reserved.
 
                         <!-- PASSWORD CHANGE -->
                         <h:outputLabel value="New Password:" for="newPassword" />
-                        
+
                         <!-- ADDRESS LINE 1 -->
                         <p:password id="newPassword" value="#{accountManager.newPassword}" feedback="true" styleClass="accountInputTextField" >
                             <!-- Execute the "validate" method in the "PasswordValidator.java" class file to validate the password entered. -->
                             <f:validator validatorId="passwordValidator" /> 
                         </p:password>
-                        
+
                         <!-- p:password changes the characters typed to bullets to hide the password as it is typed -->
 
                         <h:outputLabel value="Confirm New Password:" for="newConfirmPassword" />
                         <p:password id="newConfirmPassword" value="toBeReadFromThisFieldByAccountManager" styleClass="accountInputTextField" />
 
                     </p:panelGrid>
-                    
+
                     <br />
                     <p:commandButton id="submit" value="Save" action="#{accountManager.updateAccount()}" 
                                      styleClass="commandButton" ajax="false" icon="ui-icon-disk" />
                     &nbsp;
                     <p:button outcome="Profile" value="Cancel" icon="ui-icon-cancel" styleClass="commandButton" />
-                    
+
                     <br /><br />
                 </h:form>
-                
+
             </div>
-            
+
         </ui:define>
 
     </ui:composition>

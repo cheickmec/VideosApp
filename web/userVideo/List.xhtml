@@ -6,90 +6,154 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
-    <ui:composition template="/template.xhtml">
+    <ui:composition template="/template/siteTemplate.xhtml">
 
 
         <ui:define name="title">
-            <h:outputText value="#{bundle.ListUserVideoTitle}"></h:outputText>
+            <h:outputText value="#{bundle.ListUserVideoPageTitle}"></h:outputText>
         </ui:define>
 
-        <ui:define name="body">
-            <h:form id="UserVideoListForm">
-                <p:panel header="#{bundle.ListUserVideoTitle}">
-                    <p:dataTable id="datalist" value="#{userVideoController.items}" var="item"
-                                 selectionMode="single" selection="#{userVideoController.selected}"
-                                 paginator="true"
-                                 rowKey="#{item.id}"
-                                 rows="10"
-                                 rowsPerPageTemplate="10,20,30,40,50"
-                                 >
+        <ui:define name="editableContent">
+            <div align="center" style="width:95%">
+                <p:growl id="growl" life="4000" />
+                <h:form id="UserVideoListForm">
+                    <p:panel header="#{bundle.ListUserVideoTitle}">
+                        <p:dataTable id="datalist" value="#{userVideoController.items}" var="item"
+                                     selectionMode="single" selection="#{userVideoController.selected}"
+                                     paginator="true" rowKey="#{item.id}"
+                                     rows="10" rowsPerPageTemplate="5,10,20,30,40,50"
+                                     >
 
-                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
-                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+                            <p:ajax event="rowSelect"   update="createButton viewButton editButton 
+                                    deleteButton playButton shareButton"/>
+                            <p:ajax event="rowUnselect" update="createButton viewButton editButton 
+                                    deleteButton playButton shareButton"/>
 
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUserVideoTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUserVideoTitle_userId}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.userId}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUserVideoTitle_title}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.title}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUserVideoTitle_description}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.description}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUserVideoTitle_youtubeVideoId}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.youtubeVideoId}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUserVideoTitle_duration}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.duration}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUserVideoTitle_datePublished}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.datePublished}">
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
-                            </h:outputText>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUserVideoTitle_category}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.category}"/>
-                        </p:column>
-                        <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{userVideoController.prepareCreate}" update=":UserVideoCreateForm" oncomplete="PF('UserVideoCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":UserVideoViewForm" oncomplete="PF('UserVideoViewDialog').show()" disabled="#{empty userVideoController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":UserVideoEditForm" oncomplete="PF('UserVideoEditDialog').show()" disabled="#{empty userVideoController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{userVideoController.destroy}" update=":growl,datalist" disabled="#{empty userVideoController.selected}"/>
-                        </f:facet>
-                    </p:dataTable>
-                </p:panel>
-            </h:form>
+                            <!-- Video ID-->
+                            <p:column style="width: 20px;text-align: center">
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListUserVideoTitle_id}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.id}"/>
+                            </p:column>
 
+                            <!-- Video Title-->
+                            <p:column sortBy="#{item.title}" 
+                                      style="width: 100px;text-align: left">
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListUserVideoTitle_title}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.title}"/>
+                            </p:column>
+
+                            <!-- Video Thumbnail-->
+                            <p:column style="width: 80px;text-align:center">
+                                <f:facet name="header">
+                                    <h:outputText value="Thumbnail"/>
+                                </f:facet>
+                                <img class="thumbnailImage" src="https://i1.ytimg.com/vi/#{item.youtubeVideoId}/hqdefault.jpg" />
+                            </p:column>
+
+                            <!-- Video Description -->
+                            <p:column style="width: 250px">
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListUserVideoTitle_description}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.description}"/>
+                            </p:column>
+
+
+                            <!-- Video Duration -->
+                            <p:column sortBy="#{item.duration}" style="text-align: center;width: 80px">
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListUserVideoTitle_duration}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.duration}"/>
+                            </p:column>
+
+                            <!-- Video Date Published-->
+                            <p:column sortBy="#{item.datePublished}" style="width:100px;text-align: center">
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListUserVideoTitle_datePublished}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.datePublished}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </h:outputText>
+                            </p:column>
+
+                            <!-- Video Category -->
+                            <p:column sortBy="#{item.category}" style="width:80px;text-align: center">
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListUserVideoTitle_category}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.category}"/>
+                            </p:column>
+                            <f:facet name="footer">
+
+                                <!-- Create Button -->
+                                <p:commandButton id="createButton" icon="ui-icon-plus"   
+                                                 value="#{bundle.Create}" 
+                                                 actionListener="#{userVideoController.prepareCreate}" 
+                                                 update=":UserVideoCreateForm" 
+                                                 oncomplete="PF('UserVideoCreateDialog').show()"/>
+
+                                <!-- View Button -->
+                                <p:commandButton id="viewButton"   icon="ui-icon-search" 
+                                                 value="#{bundle.View}" 
+                                                 update=":UserVideoViewForm" 
+                                                 oncomplete="PF('UserVideoViewDialog').show()" 
+                                                 disabled="#{empty userVideoController.selected}"/>
+
+                                <!-- Edit Button -->
+                                <p:commandButton id="editButton"   icon="ui-icon-pencil" 
+                                                 value="#{bundle.Edit}" 
+                                                 update=":UserVideoEditForm" 
+                                                 oncomplete="PF('UserVideoEditDialog').show()" 
+                                                 disabled="#{empty userVideoController.selected}"/>
+
+                                <!-- Delete Button -->
+                                <p:commandButton id="deleteButton" icon="ui-icon-trash"  
+                                                 value="#{bundle.Delete}" actionListener="#{userVideoController.destroy}" 
+                                                 update=":growl,datalist" disabled="#{empty userVideoController.selected}">
+                                    <p:confirm header="#{bundle.PublicVideoDeleteConfirmationHeader}"
+                                               message="#{bundle.PublicVideoDeleteConfirmationMessage}"
+                                               icon="ui-icon-alert" />
+                                </p:commandButton>
+                                <p:confirmDialog id="confirmDialogBox" global="true" showEffect="fade" hideEffect="fade">
+                                    <div align="center">
+                                        <p:commandButton value="No" type="button" 
+                                                         styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+                                        &nbsp;
+
+                                        <p:commandButton value="Yes" type="button"
+                                                         styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                    </div>
+                                </p:confirmDialog>
+
+                                <!-- Play Button -->                                
+                                <p:commandButton id="playButton" icon="ui-icon-play"
+                                                 value="#{bundle.Play}" update=":UserVideoPlayForm"
+                                                 oncomplete="PF('UserVideoPlayDialog').show()"
+                                                 disabled="#{empty userVideoController.selected}"/>
+
+
+                                <!-- Share Button -->
+                                <p:commandButton id="shareButton" icon="ui-icon-circle-plus"
+                                                 value="#{bundle.Share}" disabled="#{empty userVideoController.selected}">
+                                    <p:confirm header="#{bundle.PublicVideoShareConfirmationHeader}"
+                                               message="#{bundle.PublicVideoShareConfirmationMessage}" icon="ui-icon-alert" /> 
+                                </p:commandButton>
+
+
+                            </f:facet>
+                        </p:dataTable>
+                    </p:panel>
+                </h:form>
+            </div>
             <ui:include src="Create.xhtml"/>
             <ui:include src="Edit.xhtml"/>
             <ui:include src="View.xhtml"/>
+            <ui:include src="Play.xhtml"/>
         </ui:define>
     </ui:composition>
 

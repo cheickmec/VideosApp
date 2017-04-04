@@ -19,11 +19,11 @@ Copyright © 2017 Cheick Berthe. All rights reserved.
                 <p:panel>
                     <table border="0" align="center" width="100%" cellpadding="0">
                         <tr>
-                            
+
                             <td align="right">
                                 <p:outputLabel value="#{bundle.SearchPublicVideoLabel_title}:" for="keyword" />
                             </td>
-                            
+
                             <td width="40%" align="center">
                                 <p:inputText id="keyword" value="#{searchedVideoController.searchKeyword}" required="true"
                                              requiredMessage="#{bundle.SearchPublicVideoRequiredMessage_title}">
@@ -31,7 +31,7 @@ Copyright © 2017 Cheick Berthe. All rights reserved.
                                 </p:inputText>
                                 <p:watermark for="keyword" value="#{bundle.SearchPublicVideoWatermark}" />
                             </td>
-                            
+
                             <td width="40%" align="center">
                                 <p:selectOneMenu id="searchCategoryField" required="true" 
                                                  requiredMessage="#{bundle.SearchPublicVideoRequireMessage_category}"

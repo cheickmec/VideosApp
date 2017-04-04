@@ -8,30 +8,49 @@
 
     <ui:composition>
 
-        <p:dialog id="UserVideoViewDlg" widgetVar="UserVideoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewUserVideoTitle}">
+        <p:dialog id="UserVideoViewDlg" widgetVar="UserVideoViewDialog" 
+                  modal="true" resizable="false" appendTo="@(body)" 
+                  header="#{bundle.ViewUserVideoTitle}">
+
             <h:form id="UserVideoViewForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{userVideoController.selected != null}">
-                        <h:outputText value="#{bundle.ViewUserVideoLabel_id}"/>
-                        <h:outputText value="#{userVideoController.selected.id}" title="#{bundle.ViewUserVideoTitle_id}"/>
-                        <h:outputText value="#{bundle.ViewUserVideoLabel_userId}"/>
-                        <h:outputText value="#{userVideoController.selected.userId}" title="#{bundle.ViewUserVideoTitle_userId}"/>
+
+                    <p:panelGrid columns="2" rendered="#{userVideoController.selected != null}"
+                                 styleClass="viewPublicVideo" columnClasses="videoColumn1, videoColumn2">
+
+                        <!-- Title -->
                         <h:outputText value="#{bundle.ViewUserVideoLabel_title}"/>
-                        <h:outputText value="#{userVideoController.selected.title}" title="#{bundle.ViewUserVideoTitle_title}"/>
+                        <h:outputText value="#{userVideoController.selected.title}" 
+                                      title="#{bundle.ViewUserVideoTitle_title}"/>
+
+                        <!-- Description -->
                         <h:outputText value="#{bundle.ViewUserVideoLabel_description}"/>
-                        <h:outputText value="#{userVideoController.selected.description}" title="#{bundle.ViewUserVideoTitle_description}"/>
+                        <h:outputText value="#{userVideoController.selected.description}" 
+                                      title="#{bundle.ViewUserVideoTitle_description}"/>
+
+                        <!-- Video ID -->
                         <h:outputText value="#{bundle.ViewUserVideoLabel_youtubeVideoId}"/>
-                        <h:outputText value="#{userVideoController.selected.youtubeVideoId}" title="#{bundle.ViewUserVideoTitle_youtubeVideoId}"/>
+                        <h:outputText value="#{userVideoController.selected.youtubeVideoId}" 
+                                      title="#{bundle.ViewUserVideoTitle_youtubeVideoId}"/>
+
+                        <!-- Duration -->
                         <h:outputText value="#{bundle.ViewUserVideoLabel_duration}"/>
-                        <h:outputText value="#{userVideoController.selected.duration}" title="#{bundle.ViewUserVideoTitle_duration}"/>
+                        <h:outputText value="#{userVideoController.selected.duration}" 
+                                      title="#{bundle.ViewUserVideoTitle_duration}"/>
+
+                        <!-- Date Published -->
                         <h:outputText value="#{bundle.ViewUserVideoLabel_datePublished}"/>
-                        <h:outputText value="#{userVideoController.selected.datePublished}" title="#{bundle.ViewUserVideoTitle_datePublished}">
+                        <h:outputText value="#{userVideoController.selected.datePublished}" 
+                                      title="#{bundle.ViewUserVideoTitle_datePublished}">
                             <f:convertDateTime pattern="MM/dd/yyyy" />
                         </h:outputText>
+
+                        <!-- Category-->
                         <h:outputText value="#{bundle.ViewUserVideoLabel_category}"/>
-                        <h:outputText value="#{userVideoController.selected.category}" title="#{bundle.ViewUserVideoTitle_category}"/>
+                        <h:outputText value="#{userVideoController.selected.category}" 
+                                      title="#{bundle.ViewUserVideoTitle_category}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="UserVideoViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Close}" onclick="PF('UserVideoViewDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

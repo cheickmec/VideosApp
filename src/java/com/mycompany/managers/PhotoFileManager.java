@@ -280,7 +280,8 @@ public class PhotoFileManager implements Serializable {
     =====================================================
      */
     /**
-     * @param inputStream of bytes to be written into file with name targetFilename
+     * @param inputStream of bytes to be written into file with name
+     * targetFilename
      * @param targetFilename
      * @return the created file targetFile
      * @throws IOException

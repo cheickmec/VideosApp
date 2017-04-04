@@ -37,11 +37,11 @@ public final class Constants {
     public static final String PHOTOS_RELATIVE_PATH = "CloudStorage\\UserPhotoStorage\\";
 
     //public static final String DEFAULT_PHOTO_RELATIVE_PATH = "CloudStorage/PhotoStorage/defaultUserPhoto.png";
-    public static final String DEFAULT_PHOTO_RELATIVE_PATH = "C:\\Users\\berth\\Documents\\CloudStorage\\UserPhotoStorage\\defaultUserPhoto.png";
-    
+    //public static final String DEFAULT_PHOTO_RELATIVE_PATH = "C:\\Users\\berth\\Documents\\CloudStorage\\UserPhotoStorage\\defaultUserPhoto.png";
+
     /* Temporary filename */
     public static final String TEMP_FILE = "tmp_file";
-    
+
     public static final Integer THUMBNAIL_SIZE = 200;
     /**
      * United States postal state abbreviations

@@ -5,6 +5,7 @@
 package com.mycompany.sessionbeans;
 
 import com.mycompany.entityclasses.UserVideo;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,5 +28,12 @@ public class UserVideoFacade extends AbstractFacade<UserVideo> {
     public UserVideoFacade() {
         super(UserVideo.class);
     }
-    
+
+    //The following method is added to the generated code
+    public List<UserVideo> findVideosByUserID(Integer userID) {
+        return (List<UserVideo>) em.createNamedQuery("UserVideo.findByUserId")
+                .setParameter("userId", userID)
+                .getResultList();
+    }
+
 }

@@ -76,7 +76,9 @@ public class UserVideoController implements Serializable {
 
     public List<UserVideo> getItems() {
         if (items == null) {
-            items = getFacade().findAll();
+            Integer userId = (Integer) FacesContext.getCurrentInstance().
+                    getExternalContext().getSessionMap().get("user_id");
+            items = getFacade().findVideosByUserID(userId);
         }
         return items;
     }
@@ -86,6 +88,9 @@ public class UserVideoController implements Serializable {
             setEmbeddableKeys();
             try {
                 if (persistAction != PersistAction.DELETE) {
+                    int userPrimaryKey = (int) FacesContext.getCurrentInstance().
+                            getExternalContext().getSessionMap().get("user_id");
+                    selected.setUserId(userPrimaryKey);
                     getFacade().edit(selected);
                 } else {
                     getFacade().remove(selected);

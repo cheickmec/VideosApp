@@ -7,7 +7,6 @@ package com.mycompany.entityclasses;
 import com.mycompany.managers.Constants;
 
 import java.io.Serializable;
-import java.net.URI;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;

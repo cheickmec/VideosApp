@@ -11,9 +11,9 @@
         <p:dialog id="PublicVideoCreateDlg" widgetVar="PublicVideoCreateDialog" modal="true" 
                   resizable="false" appendTo="@(body)" header="#{bundle.CreatePublicVideoTitle}"
                   width="80%">
-            
+
             <h:form id="PublicVideoCreateForm">
-                
+
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" columnClasses="videoColumn1, videoColumn2"
                                  rendered="#{publicVideoController.selected != null}"
@@ -52,8 +52,8 @@
                         <!-- Video Category-->
                         <p:outputLabel value="#{bundle.CreatePublicVideoLabel_category}" for="category" />
                         <p:selectOneMenu id="category" value="#{publicVideoController.selected.category}" 
-                                     title="#{bundle.CreatePublicVideoTitle_category}" required="true" 
-                                     requiredMessage="#{bundle.CreatePublicVideoRequiredMessage_category}">
+                                         title="#{bundle.CreatePublicVideoTitle_category}" required="true" 
+                                         requiredMessage="#{bundle.CreatePublicVideoRequiredMessage_category}">
                             <f:selectItem itemLabel="Select Video Category" itemValue="" noSelectionOption="true"/>
                             <f:selectItem itemLabel="Cars &amp; Vehicles" itemValue="Cars &amp; Vehicles"/>
                             <f:selectItem itemLabel="Comedy" itemValue="Comedy"/>
@@ -71,7 +71,7 @@
                             <f:selectItem itemLabel="Sports" itemValue="Sports"/>
                             <f:selectItem itemLabel="Travel &amp; Events" itemValue="Travel &amp; Events"/>
                         </p:selectOneMenu>
-                    
+
                     </p:panelGrid>
                     <p:spacer height="10"/>
                     <div align="center">

@@ -184,5 +184,5 @@ public class UserVideo implements Serializable {
     public String toString() {
         return "com.mycompany.entityclasses.UserVideo[ id=" + id + " ]";
     }
-    
+
 }

@@ -173,5 +173,5 @@ public class PublicVideo implements Serializable {
     public String toString() {
         return "com.mycompany.entityclasses.PublicVideo[ id=" + id + " ]";
     }
-    
+
 }

@@ -29,8 +29,8 @@ Copyright © 2017 Cheick Berthe. All rights reserved.
 
                         <!-- Use absolute path for the image file since it will be accessed from all pages -->
                         <h:link outcome="/index"><img src="#{resource['images:VideosLogo.png']}"
-                                                     style="width:100%; height:100%; max-height:64px; max-width:230px; border: none"
-                                                     alt="Company Logo"/>
+                                                      style="width:100%; height:100%; max-height:64px; max-width:230px; border: none"
+                                                      alt="Company Logo"/>
                         </h:link>
 
                     </td>
@@ -62,7 +62,7 @@ Copyright © 2017 Cheick Berthe. All rights reserved.
                         <h:link outcome="/publicVideo/List" styleClass="arialTen">
                             <i class="fa fa-youtube">&nbsp;</i>Public Video
                         </h:link>&nbsp;&nbsp;
-                        
+
                         <!-- "Sign Out" and "My Account" if a user is signed in -->
                         <c:if test="#{accountManager.isLoggedIn() == true}">
 
@@ -75,8 +75,8 @@ Copyright © 2017 Cheick Berthe. All rights reserved.
                             <h:link outcome="/Profile" styleClass="arialTen">
                                 <i class="fa fa-user">&nbsp;</i>My Account
                             </h:link>&nbsp;&nbsp;
-                           
-                             <!-- Clicking "My Videos" displays the userVideo/List.xhtml file -->
+
+                            <!-- Clicking "My Videos" displays the userVideo/List.xhtml file -->
                             <h:link outcome="/userVideo/List" styleClass="arialTen">
                                 <i class="fa fa-heart">&nbsp;</i>My Videos
                             </h:link>&nbsp;&nbsp;

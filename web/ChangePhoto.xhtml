@@ -8,7 +8,7 @@ Copyright © 2017 Cheick Berthe. All rights reserved.
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://java.sun.com/jsf/facelets">
-    
+
     <!-- Do not enter tags before the composition line since they are ignored by JSF -->
 
     <!-- This page is constructed based on the siteTemplate -->
@@ -23,7 +23,7 @@ Copyright © 2017 Cheick Berthe. All rights reserved.
         <ui:define name="editableContent"> 
 
             <div align="center" style="width:50%; margin:0 auto;">
-                
+
                 <!--
                 You can place p:growl anywhere on your JSF page since the messages are displayed
                 as an overlay. The life attribute defines how long the message will be displayed 
@@ -55,13 +55,13 @@ Copyright © 2017 Cheick Berthe. All rights reserved.
                     <br/>
                     <!-- Error messages are displayed here -->
                     <h:outputText styleClass="errorMessages" value="#{photoFileManager.message}" />
-                    
+
                     <br/>
                     <p:commandButton id="cancel" value="Cancel" ajax="false" styleClass="commandButton"
-                                         action="#{photoFileManager.cancel()}" icon="ui-icon-cancel" />
+                                     action="#{photoFileManager.cancel()}" icon="ui-icon-cancel" />
                     &nbsp;
                     <p:commandButton id="clear" value="Clear" ajax="false" styleClass="commandButton"
-                                         action="#{photoFileManager.clearErrorMessage()}" icon="ui-icon-refresh" />
+                                     action="#{photoFileManager.clearErrorMessage()}" icon="ui-icon-refresh" />
                 </h:form>
             </div>
 

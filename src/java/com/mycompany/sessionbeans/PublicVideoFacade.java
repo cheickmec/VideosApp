@@ -104,8 +104,8 @@ public class PublicVideoFacade extends AbstractFacade<PublicVideo> {
     -----------------------------------------
      */
     /**
-     * Searches UsersVideosDB for videos where the video title, description, or category name contains
-     * the searchString entered by the user
+     * Searches UsersVideosDB for videos where the video title, description, or
+     * category name contains the searchString entered by the user
      *
      * @param searchString contains the search string the user entered for
      * searching video title, description, or category names
@@ -119,7 +119,7 @@ public class PublicVideoFacade extends AbstractFacade<PublicVideo> {
                 .createQuery("SELECT p FROM PublicVideo p WHERE p.title LIKE :searchString OR p.description LIKE :searchString OR p.category LIKE :searchString")
                 .setParameter("searchString", searchString)
                 .getResultList();
-    
+
     }
 
 }
