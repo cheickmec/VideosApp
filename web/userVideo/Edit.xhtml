@@ -75,7 +75,7 @@
                     <p:spacer height="10"/>
                     <div align="center">
                         <!-- SAVE button -->
-                        <p:commandButton actionListener="#{userVideoController.update}" styleClass="commandButton"
+                        <p:commandButton actionListener="#{userVideoController.update}" styleClass="commandButton" ajax="false"
                                          value="#{bundle.Save}" update="display,:UserVideoListForm:datalist,:growl" 
                                          oncomplete="handleSubmit(args, 'UserVideoEditDialog');" icon="ui-icon-disk"/>
                         <!--CANCEL button-->

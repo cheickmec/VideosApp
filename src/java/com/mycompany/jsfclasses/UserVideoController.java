@@ -1,8 +1,10 @@
 package com.mycompany.jsfclasses;
 
+import com.mycompany.entityclasses.PublicVideo;
 import com.mycompany.entityclasses.UserVideo;
 import com.mycompany.jsfclasses.util.JsfUtil;
 import com.mycompany.jsfclasses.util.JsfUtil.PersistAction;
+import com.mycompany.sessionbeans.PublicVideoFacade;
 import com.mycompany.sessionbeans.UserVideoFacade;
 
 import java.io.Serializable;
@@ -24,7 +26,10 @@ import javax.faces.convert.FacesConverter;
 public class UserVideoController implements Serializable {
 
     @EJB
-    private com.mycompany.sessionbeans.UserVideoFacade ejbFacade;
+    private UserVideoFacade ejbFacade;
+    @EJB
+    private PublicVideoFacade publicVideoFacade;
+
     private List<UserVideo> items = null;
     private UserVideo selected;
 
@@ -74,12 +79,19 @@ public class UserVideoController implements Serializable {
         }
     }
 
+    public void share() {
+        PublicVideo newVideo = new PublicVideo(selected.getTitle(), selected.getDescription(),
+                selected.getYoutubeVideoId(), selected.getDuration(), selected.getDatePublished(), selected.getCategory());
+        publicVideoFacade.edit(newVideo);
+        JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UserVideoShared"));
+    }
+
     public List<UserVideo> getItems() {
-        if (items == null) {
-            Integer userId = (Integer) FacesContext.getCurrentInstance().
-                    getExternalContext().getSessionMap().get("user_id");
-            items = getFacade().findVideosByUserID(userId);
-        }
+
+        Integer userId = (Integer) FacesContext.getCurrentInstance().
+                getExternalContext().getSessionMap().get("user_id");
+        items = getFacade().findVideosByUserID(userId);
+
         return items;
     }
 

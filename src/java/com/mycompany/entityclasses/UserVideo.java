@@ -86,8 +86,8 @@ public class UserVideo implements Serializable {
         this.id = id;
     }
 
-    public UserVideo(Integer id, String title, String description, String youtubeVideoId, String duration, Date datePublished, String category) {
-        this.id = id;
+    public UserVideo(Integer userId, String title, String description, String youtubeVideoId, String duration, Date datePublished, String category) {
+        this.userId = userId;
         this.title = title;
         this.description = description;
         this.youtubeVideoId = youtubeVideoId;

@@ -68,7 +68,7 @@
                     <div align="center">
                         <!-- SAVE button -->
                         <p:commandButton actionListener="#{publicVideoController.update}" styleClass="commandButton"
-                                         value="#{bundle.Save}" update="display,:PublicVideoListForm:datalist,:growl"
+                                         value="#{bundle.Save}" update="display,:PublicVideoListForm:datalist,:growl" ajax="false"
                                          oncomplete="handleSubmit(args, 'PublicVideoEditDialog');" icon="ui-icon-disk"/>
                         &nbsp;
                         <!-- CANCEL button -->

@@ -1,9 +1,11 @@
 package com.mycompany.jsfclasses;
 
 import com.mycompany.entityclasses.PublicVideo;
+import com.mycompany.entityclasses.UserVideo;
 import com.mycompany.jsfclasses.util.JsfUtil;
 import com.mycompany.jsfclasses.util.JsfUtil.PersistAction;
 import com.mycompany.sessionbeans.PublicVideoFacade;
+import com.mycompany.sessionbeans.UserVideoFacade;
 
 import java.io.Serializable;
 import java.util.List;
@@ -24,7 +26,10 @@ import javax.faces.convert.FacesConverter;
 public class PublicVideoController implements Serializable {
 
     @EJB
-    private com.mycompany.sessionbeans.PublicVideoFacade ejbFacade;
+    private UserVideoFacade userVideoFacade;
+
+    @EJB
+    private PublicVideoFacade ejbFacade;
     private List<PublicVideo> items = null;
     private PublicVideo selected;
 
@@ -74,10 +79,24 @@ public class PublicVideoController implements Serializable {
         }
     }
 
-    public List<PublicVideo> getItems() {
-        if (items == null) {
-            items = getFacade().findAll();
+    public void share() {
+        Integer userId = (Integer) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user_id");
+
+        // Check that user is logged in
+        if (userId == null) {
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("PublicVideoNotShared"));
+        } else {
+            //add video to user videos
+            UserVideo newVideo = new UserVideo(userId, selected.getTitle(),
+                    selected.getDescription(), selected.getYoutubeVideoId(),
+                    selected.getDuration(), selected.getDatePublished(), selected.getCategory());
+            userVideoFacade.edit(newVideo);
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("PublicVideoShared"));
         }
+    }
+
+    public List<PublicVideo> getItems() {
+        items = getFacade().findAll();
         return items;
     }
 
